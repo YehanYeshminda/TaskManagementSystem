@@ -33,10 +33,15 @@ namespace API.Controllers
 
             if (!result.Succeeded) return BadRequest(result.Errors);
 
+            // default register will be a member
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+            if (!roleResult.Succeeded) return BadRequest(result.Errors);
+
             return new UserDto
             {
                 UserName = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
             };
         }
 
@@ -54,7 +59,7 @@ namespace API.Controllers
             return new UserDto
             {
                 UserName = user.UserName,
-                Token = _tokenService.CreateToken(user),
+                Token = await _tokenService.CreateToken(user),
             };
         }
 
