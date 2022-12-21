@@ -1,32 +1,48 @@
 [
 	{
-		"UserName": "Rae"
+		"UserName": "Rae",
+		"FirstName": "yehan",
+		"LastName": "yeshminda",
+		"Email": "yeshanyesh12@gmail.com",
+		"DateOfBirth": "2018-02-21",
+		"Gender": "Male",
+		"NIC": "NIC",
+		"Address": "Hikkaduwa",
+		"JoinDate": "2018-02-21",
+		"UpdatedAt": "2018-02-21",
+		"DeletedAt": "2018-02-21",
+		"Departments": [
+			{
+				"Name": "Upside down",
+				"Description": "this is the new Description",
+				"DepartmentNo": "10th",
+				"PhoneNumber": "0775518271",
+				"Email": "yeshanyesh12@gmail.com",
+				"Address": "Hikkaduwa"
+			}
+		]
 	},
 	{
-		"UserName": "June"
-	},
-	{
-		"UserName": "Lois"
-	},
-	{
-		"UserName": "Abby"
-	},
-	{
-		"UserName": "Rhonda"
-	},
-	{
-		"UserName": "Gill"
-	},
-	{
-		"UserName": "Fischer"
-	},
-	{
-		"UserName": "Woods"
-	},
-	{
-		"UserName": "Dickerson"
-	},
-	{
-		"UserName": "Little"
+		"UserName": "Yehan",
+		"FirstName": "yehan",
+		"LastName": "yeshminda",
+		"Email": "yeshanyesh12@gmail.com",
+		"DateOfBirth": "2018-02-21",
+		"Gender": "Male",
+		"NIC": "NIC",
+		"Address": "Hikkaduwa",
+		"JoinDate": "2018-02-21",
+		"UpdatedAt": "2018-02-21",
+		"DeletedAt": "2018-02-21",
+		"Departments": [
+			{
+				"Name": "Upside down",
+				"Description": "this is the new Description",
+				"DepartmentNo": "10th",
+				"PhoneNumber": "0775518271",
+				"Email": "yeshanyesh12@gmail.com",
+				"Address": "Hikkaduwa"
+			}
+		]
 	}
 ]
