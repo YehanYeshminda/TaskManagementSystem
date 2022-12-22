@@ -5,7 +5,7 @@ namespace API.Dtos
     public class RegisterDto
     {
         [Required]
-        [MaxLength(16)]
+        [MaxLength(30)]
         public string UserName { get; set; }
 
         [Required]

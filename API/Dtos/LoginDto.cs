@@ -5,7 +5,7 @@ namespace API.Dtos
     public class LoginDto
     {
         [Required]
-        [MaxLength(16)]
+        [MaxLength(30)]
         public string UserName { get; set; }
 
         [Required]
