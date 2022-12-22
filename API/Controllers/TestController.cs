@@ -17,14 +17,14 @@ namespace API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet] // returns all the users as a paused method which is task
-         public async Task<IEnumerable<AppUser>> GetUsersAsync()
-        {
-            return await _context.Users
-                    .Include(d => d.Departments).ThenInclude(c => c.Company)
-                    .Include(d => d.Departments).ThenInclude(f => f.Factory).ThenInclude(c => c.Company)
-                    .Include(d => d.Departments).ThenInclude(f => f.Factory).ThenInclude(p => p.Plant).ThenInclude(c => c.Company)
-                    .ToListAsync();
-        }
+        // [HttpGet] // returns all the users as a paused method which is task
+        //  public async Task<IEnumerable<AppUser>> GetUsersAsync()
+        // {
+        //     return await _context.Users
+        //             .Include(d => d.Departments).ThenInclude(c => c.Company)
+        //             .Include(d => d.Departments).ThenInclude(f => f.Factory).ThenInclude(c => c.Company)
+        //             .Include(d => d.Departments).ThenInclude(f => f.Factory).ThenInclude(p => p.Plant).ThenInclude(c => c.Company)
+        //             .ToListAsync();
+        // }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221221222614_addedDepartmentDependencies")]
-    partial class addedDepartmentDependencies
+    [Migration("20221222220847_addedTaskWorkshop")]
+    partial class addedTaskWorkshop
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -198,8 +198,8 @@ namespace API.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegNo")
                         .HasColumnType("nvarchar(max)");
@@ -223,7 +223,7 @@ namespace API.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CompanyId")
+                    b.Property<int?>("CompanysId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -241,7 +241,7 @@ namespace API.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("FactoryId")
+                    b.Property<int?>("FactorysId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -255,11 +255,11 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("CompanysId");
 
-                    b.HasIndex("FactoryId");
+                    b.HasIndex("FactorysId");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("API.Entities.Factory", b =>
@@ -291,8 +291,8 @@ namespace API.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PlantId")
                         .HasColumnType("int");
@@ -338,8 +338,8 @@ namespace API.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PlantNo")
                         .HasColumnType("nvarchar(max)");
@@ -352,6 +352,98 @@ namespace API.Data.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Plant");
+                });
+
+            modelBuilder.Entity("API.Entities.UserTasks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomerDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("WorkShopId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("WorkShopId");
+
+                    b.ToTable("UserTasks");
+                });
+
+            modelBuilder.Entity("API.Entities.WorkShop", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telephone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("WorkShops");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -445,7 +537,7 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.HasOne("API.Entities.Department", "Departments")
-                        .WithMany()
+                        .WithMany("AppUsers")
                         .HasForeignKey("DepartmentsId");
 
                     b.Navigation("Departments");
@@ -472,27 +564,27 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Department", b =>
                 {
-                    b.HasOne("API.Entities.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId");
+                    b.HasOne("API.Entities.Company", "Companys")
+                        .WithMany("Departments")
+                        .HasForeignKey("CompanysId");
 
-                    b.HasOne("API.Entities.Factory", "Factory")
-                        .WithMany()
-                        .HasForeignKey("FactoryId");
+                    b.HasOne("API.Entities.Factory", "Factorys")
+                        .WithMany("Departments")
+                        .HasForeignKey("FactorysId");
 
-                    b.Navigation("Company");
+                    b.Navigation("Companys");
 
-                    b.Navigation("Factory");
+                    b.Navigation("Factorys");
                 });
 
             modelBuilder.Entity("API.Entities.Factory", b =>
                 {
                     b.HasOne("API.Entities.Company", "Company")
-                        .WithMany()
+                        .WithMany("Factories")
                         .HasForeignKey("CompanyId");
 
                     b.HasOne("API.Entities.Plant", "Plant")
-                        .WithMany()
+                        .WithMany("Factories")
                         .HasForeignKey("PlantId");
 
                     b.Navigation("Company");
@@ -503,10 +595,34 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Plant", b =>
                 {
                     b.HasOne("API.Entities.Company", "Company")
-                        .WithMany()
+                        .WithMany("Plants")
                         .HasForeignKey("CompanyId");
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("API.Entities.UserTasks", b =>
+                {
+                    b.HasOne("API.Entities.Department", "Department")
+                        .WithMany("UserTasks")
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("API.Entities.WorkShop", "WorkShop")
+                        .WithMany("UserTasks")
+                        .HasForeignKey("WorkShopId");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("WorkShop");
+                });
+
+            modelBuilder.Entity("API.Entities.WorkShop", b =>
+                {
+                    b.HasOne("API.Entities.Department", "Department")
+                        .WithMany("WorkShops")
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -553,6 +669,39 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("API.Entities.Company", b =>
+                {
+                    b.Navigation("Departments");
+
+                    b.Navigation("Factories");
+
+                    b.Navigation("Plants");
+                });
+
+            modelBuilder.Entity("API.Entities.Department", b =>
+                {
+                    b.Navigation("AppUsers");
+
+                    b.Navigation("UserTasks");
+
+                    b.Navigation("WorkShops");
+                });
+
+            modelBuilder.Entity("API.Entities.Factory", b =>
+                {
+                    b.Navigation("Departments");
+                });
+
+            modelBuilder.Entity("API.Entities.Plant", b =>
+                {
+                    b.Navigation("Factories");
+                });
+
+            modelBuilder.Entity("API.Entities.WorkShop", b =>
+                {
+                    b.Navigation("UserTasks");
                 });
 #pragma warning restore 612, 618
         }

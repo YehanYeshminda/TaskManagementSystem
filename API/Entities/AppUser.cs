@@ -14,7 +14,8 @@ namespace API.Entities
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        public ICollection<AppUserRole> UserRoles { get; set; }
         public Department Departments { get; set; }
+        public ICollection<AppUserRole> UserRoles { get; set; }
+        public ICollection<UserTasks> UserTasks { get; set; }
     }
 }

@@ -11,6 +11,9 @@ namespace API.Entities
         public string Address { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }        
+        public DateTime? DeletedAt { get; set; }
+        public ICollection<Department> Departments { get; set; }
+        public ICollection<Factory> Factories { get; set; }
+        public ICollection<Plant> Plants { get; set; }
     }
 }

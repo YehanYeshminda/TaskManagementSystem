@@ -12,7 +12,11 @@ namespace API.Entities
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        public Company Company { get; set; }
-        public Factory Factory { get; set; }
+        public ICollection<AppUser> AppUsers { get; set; }
+        public ICollection<WorkShop> WorkShops { get; set; }
+        public ICollection<UserTasks> UserTasks { get; set; }
+        public ICollection<Unit> Units { get; set; }
+        public Company Companys { get; set; }
+        public Factory Factorys { get; set; }
     }
 }

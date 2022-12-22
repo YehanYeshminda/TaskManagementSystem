@@ -53,69 +53,73 @@ namespace API.Data
             await userManager.CreateAsync(wordshopSupervisor, "Pa$$w0rd");
             await userManager.AddToRolesAsync(wordshopSupervisor, new[] {"WorkshopAndUnitSupervisor"});
 
-            var admin = new AppUser
-            {
-                UserName = "Admin"
-            };
+            // var admin = new AppUser
+            // {
+            //     UserName = "Admin"
+            // };
 
-            await userManager.CreateAsync(admin, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(admin, new[] {"Admin"});
+            // await userManager.CreateAsync(admin, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(admin, new[] {"Admin"});
 
-            var departmentSupervisor = new AppUser
-            {
-                UserName = "DepartmentSupervisor"
-            };
+            // var departmentSupervisor = new AppUser
+            // {
+            //     UserName = "DepartmentSupervisor"
+            // };
 
-            await userManager.CreateAsync(departmentSupervisor, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(departmentSupervisor, new[] {"DepartmentSupervisor"});
+            // await userManager.CreateAsync(departmentSupervisor, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(departmentSupervisor, new[] {"DepartmentSupervisor"});
 
-            var engineeringDepartmentManager = new AppUser
-            {
-                UserName = "EngineeringDepartmentManager"
-            };
+            // var engineeringDepartmentManager = new AppUser
+            // {
+            //     UserName = "EngineeringDepartmentManager"
+            // };
 
-            await userManager.CreateAsync(engineeringDepartmentManager, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(engineeringDepartmentManager, new[] {"EngineeringDepartmentManager"});
+            // await userManager.CreateAsync(engineeringDepartmentManager, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(engineeringDepartmentManager, new[] {"EngineeringDepartmentManager"});
 
-            var salesMarketingDepartmentManager = new AppUser
-            {
-                UserName = "SalesMarketingDepartmentManager"
-            };
+            // var salesMarketingDepartmentManager = new AppUser
+            // {
+            //     UserName = "SalesMarketingDepartmentManager"
+            // };
 
-            await userManager.CreateAsync(salesMarketingDepartmentManager, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(salesMarketingDepartmentManager, new[] {"SalesMarketingDepartmentManager"});
+            // await userManager.CreateAsync(salesMarketingDepartmentManager, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(salesMarketingDepartmentManager, new[] {"SalesMarketingDepartmentManager"});
 
-            var purchasingDepartmentManager = new AppUser
-            {
-                UserName = "PurchasingDepartmentManager"
-            };
+            // var purchasingDepartmentManager = new AppUser
+            // {
+            //     UserName = "PurchasingDepartmentManager"
+            // };
 
-            await userManager.CreateAsync(purchasingDepartmentManager, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(purchasingDepartmentManager, new[] {"PurchasingDepartmentManager"});
+            // await userManager.CreateAsync(purchasingDepartmentManager, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(purchasingDepartmentManager, new[] {"PurchasingDepartmentManager"});
 
-            var financeDepartmentManager = new AppUser
-            {
-                UserName = "FinanceDepartmentManager"
-            };
+            // var financeDepartmentManager = new AppUser
+            // {
+            //     UserName = "FinanceDepartmentManager"
+            // };
 
-            await userManager.CreateAsync(financeDepartmentManager, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(financeDepartmentManager, new[] {"FinanceDepartmentManager"});
+            // await userManager.CreateAsync(financeDepartmentManager, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(financeDepartmentManager, new[] {"FinanceDepartmentManager"});
 
-            var hrDepartmentManager = new AppUser
-            {
-                UserName = "HRDepartmentManager"
-            };
+            // var hrDepartmentManager = new AppUser
+            // {
+            //     UserName = "HRDepartmentManager"
+            // };
 
-            await userManager.CreateAsync(hrDepartmentManager, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(hrDepartmentManager, new[] {"HRDepartmentManager"});
+            // await userManager.CreateAsync(hrDepartmentManager, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(hrDepartmentManager, new[] {"HRDepartmentManager"});
 
-            var factoryManagementDepartmentManager = new AppUser
-            {
-                UserName = "FactoryManagementDepartmentManager"
-            };
+            // var factoryManagementDepartmentManager = new AppUser
+            // {
+            //     UserName = "FactoryManagementDepartmentManager",
+            //     Departments = new Department 
+            //     {
 
-            await userManager.CreateAsync(factoryManagementDepartmentManager, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(factoryManagementDepartmentManager, new[] {"FactoryManagementDepartmentManager"});
+            //     }
+            // };
+
+            // await userManager.CreateAsync(factoryManagementDepartmentManager, "Pa$$w0rd");
+            // await userManager.AddToRolesAsync(factoryManagementDepartmentManager, new[] {"FactoryManagementDepartmentManager"});
         }    
     }
 }

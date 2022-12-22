@@ -1,6 +1,6 @@
 namespace API.Entities
 {
-    public class Unit
+    public class WorkShop
     {
         public int Id { get; set; }
         public string Name { get; set; }

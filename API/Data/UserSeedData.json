@@ -9,110 +9,48 @@
 		"NIC": "NIC",
 		"Address": "Hikkaduwa",
 		"JoinDate": "2018-02-21",
-		"UpdatedAt": "2018-02-21",
-		"DeletedAt": "2018-02-21",
 		"Departments": {
 			"Name": "Department 1",
 			"Description": "Boom description",
 			"DepartmentNo": "NG1212",
 			"PhoneNumber": "0775518271",
-			"EmaiL": "YESHANYESH12@GMAIL.COM",
+			"Email": "YESHANYESH12@GMAIL.COM",
 			"Address": "asdasdasd",
-			"Company": {
+			"Companys": {
 				"Name": "Company 1",
 				"Description": "Boom description",
 				"RegNo": "NG1212",
 				"PhoneNumber": "0775518271",
-				"EmaiL": "YESHANYESH12@GMAIL.COM",
+				"Email": "YESHANYESH12@GMAIL.COM",
 				"Address": "asdasdasd"
 			},
-			"Factory": {
+			"Factorys": {
 				"Name": "Factory 1",
 				"Description": "Boom description",
 				"FactoryNo": "NG1212",
 				"PhoneNumber": "0775518271",
-				"EmaiL": "YESHANYESH12@GMAIL.COM",
+				"Email": "YESHANYESH12@GMAIL.COM",
 				"Company": {
 					"Name": "Company 1",
 					"Description": "Boom description",
 					"RegNo": "NG1212",
 					"PhoneNumber": "0775518271",
-					"EmaiL": "YESHANYESH12@GMAIL.COM",
+					"Email": "YESHANYESH12@GMAIL.COM",
 					"Address": "asdasdasd"
 				},
 				"Plant": {
-					"Name": "Company 1",
+					"Name": "Factory 1",
 					"Description": "Boom description",
 					"PlantNo": "NG1212",
 					"PhoneNumber": "0775518271",
-					"EmaiL": "YESHANYESH12@GMAIL.COM",
+					"Email": "YESHANYESH12@GMAIL.COM",
 					"Address": "asdasdasd",
 					"Company": {
 						"Name": "Company 1",
 						"Description": "Boom description",
 						"RegNo": "NG1212",
 						"PhoneNumber": "0775518271",
-						"EmaiL": "YESHANYESH12@GMAIL.COM",
-						"Address": "asdasdasd"
-					}
-				}
-			}
-		}
-	},
-	{
-		"UserName": "Yehan",
-		"FirstName": "yehan",
-		"LastName": "yeshminda",
-		"Email": "yeshanyesh12@gmail.com",
-		"DateOfBirth": "2018-02-21",
-		"Gender": "Male",
-		"NIC": "NIC",
-		"Address": "Hikkaduwa",
-		"JoinDate": "2018-02-21",
-		"UpdatedAt": "2018-02-21",
-		"DeletedAt": "2018-02-21",
-		"Departments": {
-			"Name": "Department 1",
-			"Description": "Boom description",
-			"DepartmentNo": "NG1212",
-			"PhoneNumber": "0775518271",
-			"EmaiL": "YESHANYESH12@GMAIL.COM",
-			"Address": "asdasdasd",
-			"Company": {
-				"Name": "Company 1",
-				"Description": "Boom description",
-				"RegNo": "NG1212",
-				"PhoneNumber": "0775518271",
-				"EmaiL": "YESHANYESH12@GMAIL.COM",
-				"Address": "asdasdasd"
-			},
-			"Factory": {
-				"Name": "Factory 1",
-				"Description": "Boom description",
-				"FactoryNo": "NG1212",
-				"PhoneNumber": "0775518271",
-				"EmaiL": "YESHANYESH12@GMAIL.COM",
-				"Company": {
-					"Name": "Company 1",
-					"Description": "Boom description",
-					"RegNo": "NG1212",
-					"PhoneNumber": "0775518271",
-					"EmaiL": "YESHANYESH12@GMAIL.COM",
-					"Address": "asdasdasd"
-				},
-				"Plant": {
-					"Name": "Company 1",
-					"Description": "Boom description",
-					"PlantNo": "NG1212",
-					"PhoneNumber": "0775518271",
-					"EmaiL": "YESHANYESH12@GMAIL.COM",
-					"Address": "asdasdasd",
-					"Company": {
-						"Name": "Company 1",
-						"Description": "Boom description",
-						"RegNo": "NG1212",
-						"PhoneNumber": "0775518271",
-						"EmaiL": "YESHANYESH12@GMAIL.COM",
+						"Email": "YESHANYESH12@GMAIL.COM",
 						"Address": "asdasdasd"
 					}
 				}

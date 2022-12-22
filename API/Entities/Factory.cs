@@ -13,5 +13,6 @@ namespace API.Entities
         public DateTime? DeletedAt { get; set; }
         public Company Company { get; set; }
         public Plant Plant { get; set; }
+        public ICollection<Department> Departments { get; set; }
     }
 }
