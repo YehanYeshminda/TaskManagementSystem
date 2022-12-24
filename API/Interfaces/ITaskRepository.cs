@@ -1,3 +1,4 @@
+using API.Dtos;
 using API.Entities;
 
 namespace API.Interfaces
@@ -7,5 +8,7 @@ namespace API.Interfaces
         void AddTask(UserTasks tasks);
         void DeleteTask(UserTasks tasks);
         Task<bool> SaveAllAsync();
+        Task<IEnumerable<TaskDto>> GetTasks();
+        Task<UserTasks> GetTasksFromId(int id);
     }
 }

@@ -72,5 +72,11 @@ namespace API.Controllers
 
             return BadRequest("Failed to save a Task!");
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetTasks()
+        {
+            return Ok(await _taskRepository.GetTasks());
+        }
     }
 }

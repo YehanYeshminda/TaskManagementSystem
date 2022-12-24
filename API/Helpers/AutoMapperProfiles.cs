@@ -9,7 +9,7 @@ namespace API.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<RegisterDto, AppUser>();
-            CreateMap<UserTasks, TaskDto>();
+            CreateMap<UserTasks, TaskDto>().ForMember(s => s.AppUserName, opt => opt.MapFrom(s => s.AppUser.UserName));
         }
     }
 }
