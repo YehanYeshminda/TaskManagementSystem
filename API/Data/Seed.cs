@@ -84,6 +84,15 @@ namespace API.Data
                         Telephone = "123",
                         Email = "test@example.com",
                         CreatedAt = DateTime.Now,
+                        Department = new Department()
+                        {
+                            Name = "Department 2",
+                            Description = "this is department description",
+                            DepartmentNo = "123",
+                            PhoneNumber = "123456",
+                            Email = "test@gmail.com",
+                            CreatedAt = DateTime.Now,
+                        }
                     });
 
                     await context.SaveChangesAsync();

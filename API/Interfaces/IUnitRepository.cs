@@ -4,6 +4,7 @@ namespace API.Interfaces
 {
     public interface IUnitRepository
     {
-        Task<Unit> GetUnitByIdAsync(int id);        
+        Task<IEnumerable<UnitDto>> GetUnits();
+        Task<Unit> GetUnitByIdAsync(int id);  
     }
 }

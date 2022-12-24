@@ -43,7 +43,7 @@ namespace API.Data
 
         public async Task<UserTasks> GetTasksFromId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.UserTasks.FindAsync(id);
         }
 
         public async Task<bool> SaveAllAsync()
