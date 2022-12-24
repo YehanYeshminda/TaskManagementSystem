@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using API.Controllers;
 using API.Data;
 using API.Helpers;
@@ -19,6 +20,12 @@ namespace API.Extensions
             services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IWorkshopRepository, WorkshopRepository>();
+
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.WriteIndented = true;
+            });
             
             services.AddDbContext<DataContext>(options =>
             {
