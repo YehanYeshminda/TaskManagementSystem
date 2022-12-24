@@ -1,5 +1,6 @@
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
@@ -14,6 +15,11 @@ namespace API.Data
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Product.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Product>> GetProducts()
+        {
+            return await _context.Product.ToListAsync();
         }
     }
 }

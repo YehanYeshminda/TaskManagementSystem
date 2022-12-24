@@ -1,5 +1,6 @@
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
@@ -14,6 +15,11 @@ namespace API.Data
         public async Task<Department> GetDepartmentByIdAsync(int id)
         {
             return await _context.Departments.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Department>> GetDepartments()
+        {
+            return await _context.Departments.ToListAsync();
         }
     }
 }
