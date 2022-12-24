@@ -102,6 +102,67 @@ namespace API.Data
 
                     await context.SaveChangesAsync();
                 }
+                
+                if (!context.Materials.Any())
+                {
+                    context.Materials.AddRange(new Materials()
+                    {
+                        Name = "Material 1",
+                        Code = "121212",
+                        Description = "this is description material",
+                        CreatedAt = DateTime.Now,
+                        Price = 100,
+                        ReOrderLevel = 20,
+                        UOM = "this is the uom",
+                        MaterialType = new MaterialType()
+                        {
+                            Name = "Material 1",
+                            Code = "121212",
+                            Description = "this is description material",
+                            CreatedAt = DateTime.Now,
+                        }
+                    });
+
+                    context.Materials.AddRange(new Materials()
+                    {
+                        Name = "Material 2",
+                        Code = "121212",
+                        Description = "this is description material",
+                        CreatedAt = DateTime.Now,
+                        Price = 100,
+                        ReOrderLevel = 20,
+                        UOM = "this is the uom",
+                        MaterialType = new MaterialType()
+                        {
+                            Name = "Material 2",
+                            Code = "121212",
+                            Description = "this is description material",
+                            CreatedAt = DateTime.Now,
+                        }
+                    });
+
+                    context.Materials.AddRange(new Materials()
+                    {
+                        Name = "Material 3",
+                        Code = "131313",
+                        Description = "this is description material",
+                        CreatedAt = DateTime.Now,
+                        Price = 100,
+                        ReOrderLevel = 30,
+                        UOM = "this is the uom",
+                        MaterialType = new MaterialType()
+                        {
+                            Name = "Material 3",
+                            Code = "131212",
+                            Description = "this is description material",
+                            CreatedAt = DateTime.Now,
+                        }
+                    });
+
+                    await context.SaveChangesAsync();
+                }
+
+
             }
         }
     }
