@@ -1,3 +1,4 @@
+using API.Data;
 using API.Extensions;
 using API.Middlewares;
 
@@ -25,7 +26,6 @@ namespace API
         {
 
             app.UseMiddleware<ExceptionMiddleware>();
-            
             if (env.IsDevelopment())
             {
                 app.UseSwagger();

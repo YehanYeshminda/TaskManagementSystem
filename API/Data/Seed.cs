@@ -2,19 +2,19 @@ using System.Text.Json;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using t = System.Threading.Tasks; 
+using t = System.Threading.Tasks;
 
 namespace API.Data
 {
     public class Seed
     {
-        public static async t.Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+        public static async t.Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, DataContext context)
         {
             if (await userManager.Users.AnyAsync()) return; // if we have any users inside of the data then return
 
             var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
 
-            var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = true};
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData); // json data gets parsed in to the method as a app user
 
@@ -51,75 +51,58 @@ namespace API.Data
             };
 
             await userManager.CreateAsync(wordshopSupervisor, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(wordshopSupervisor, new[] {"WorkshopAndUnitSupervisor"});
+            await userManager.AddToRolesAsync(wordshopSupervisor, new[] { "WorkshopAndUnitSupervisor" });
+        }
 
-            // var admin = new AppUser
-            // {
-            //     UserName = "Admin"
-            // };
 
-            // await userManager.CreateAsync(admin, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(admin, new[] {"Admin"});
+        public static async void SeedInformation(ApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<DataContext>();
 
-            // var departmentSupervisor = new AppUser
-            // {
-            //     UserName = "DepartmentSupervisor"
-            // };
+                if (!context.Product.Any())
+                {
+                    context.Product.AddRange(new Product()
+                    {
+                        Name = "Product 1",
+                        CostPrice = 100,
+                        SalePrice = 200,
+                        Description = "this is product description",
+                        CreatedAt = DateTime.Now,
+                    });
 
-            // await userManager.CreateAsync(departmentSupervisor, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(departmentSupervisor, new[] {"DepartmentSupervisor"});
+                    await context.SaveChangesAsync();
+                }
 
-            // var engineeringDepartmentManager = new AppUser
-            // {
-            //     UserName = "EngineeringDepartmentManager"
-            // };
+                if (!context.Unit.Any())
+                {
+                    context.Unit.AddRange(new Unit()
+                    {
+                        Name = "Unit 1",
+                        Description = "this is unit description",
+                        Telephone = "123",
+                        Email = "test@example.com",
+                        CreatedAt = DateTime.Now,
+                    });
 
-            // await userManager.CreateAsync(engineeringDepartmentManager, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(engineeringDepartmentManager, new[] {"EngineeringDepartmentManager"});
+                    await context.SaveChangesAsync();
+                }
 
-            // var salesMarketingDepartmentManager = new AppUser
-            // {
-            //     UserName = "SalesMarketingDepartmentManager"
-            // };
+                if (!context.WorkShops.Any())
+                {
+                    context.WorkShops.AddRange(new WorkShop()
+                    {
+                        Name = "WorkShop 1",
+                        Description = "this is a new work shop",
+                        Telephone = "123",
+                        Email = "test@gmail.com",
+                        CreatedAt = DateTime.Now,
+                    });
 
-            // await userManager.CreateAsync(salesMarketingDepartmentManager, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(salesMarketingDepartmentManager, new[] {"SalesMarketingDepartmentManager"});
-
-            // var purchasingDepartmentManager = new AppUser
-            // {
-            //     UserName = "PurchasingDepartmentManager"
-            // };
-
-            // await userManager.CreateAsync(purchasingDepartmentManager, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(purchasingDepartmentManager, new[] {"PurchasingDepartmentManager"});
-
-            // var financeDepartmentManager = new AppUser
-            // {
-            //     UserName = "FinanceDepartmentManager"
-            // };
-
-            // await userManager.CreateAsync(financeDepartmentManager, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(financeDepartmentManager, new[] {"FinanceDepartmentManager"});
-
-            // var hrDepartmentManager = new AppUser
-            // {
-            //     UserName = "HRDepartmentManager"
-            // };
-
-            // await userManager.CreateAsync(hrDepartmentManager, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(hrDepartmentManager, new[] {"HRDepartmentManager"});
-
-            // var factoryManagementDepartmentManager = new AppUser
-            // {
-            //     UserName = "FactoryManagementDepartmentManager",
-            //     Departments = new Department 
-            //     {
-
-            //     }
-            // };
-
-            // await userManager.CreateAsync(factoryManagementDepartmentManager, "Pa$$w0rd");
-            // await userManager.AddToRolesAsync(factoryManagementDepartmentManager, new[] {"FactoryManagementDepartmentManager"});
-        }    
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
     }
 }

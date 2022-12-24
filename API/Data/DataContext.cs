@@ -14,6 +14,9 @@ namespace API.Data
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Department> Departments {get; set;}
         public DbSet<WorkShop> WorkShops { get; set;}
+        public DbSet<UserTasks> UserTasks { get; set;}
+        public DbSet<Product> Product { get; set;}
+        public DbSet<Unit> Unit { get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
