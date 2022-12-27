@@ -17,7 +17,10 @@ namespace API.Data
         
         public async Task<Unit> GetUnitByIdAsync(int id)
         {
-            return await _context.Unit.FindAsync(id);
+            return await _context.Unit
+            .Include(s => s.Department)
+            .Include(s => s.UserTasks)
+            .SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<UnitDto>> GetUnits()

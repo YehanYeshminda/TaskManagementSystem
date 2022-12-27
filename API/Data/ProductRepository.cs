@@ -14,12 +14,16 @@ namespace API.Data
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            return await _context.Product.FindAsync(id);
+            return await _context.Product
+            .Include(s => s.UserTasks)
+            .SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Product>> GetProducts()
         {
-            return await _context.Product.ToListAsync();
+            return await _context.Product
+            .Include(s => s.UserTasks)
+            .ToListAsync();
         }
     }
 }
