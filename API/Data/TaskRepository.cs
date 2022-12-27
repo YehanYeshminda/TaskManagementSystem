@@ -2,7 +2,6 @@ using API.Dtos;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -50,6 +49,11 @@ namespace API.Data
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public void Update (UserTasks userTasks)
+        {
+            _context.Entry(userTasks).State = EntityState.Modified;
         }
     }
 }

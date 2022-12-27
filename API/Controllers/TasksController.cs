@@ -81,14 +81,18 @@ namespace API.Controllers
             return Ok(await _taskRepository.GetTasks());
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateTask(TaskUpdateDto taskUpdateDto)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateTask([FromBody]TaskUpdateDto userTasks, [FromRoute]int id)
         {
-            var task = _taskRepository.GetTasksFromId(taskUpdateDto.Id);
+            var task = await _taskRepository.GetTasksFromId(id);
 
-            if (await _taskRepository.SaveAllAsync()) return Ok("Task has been updated");
+            if (task == null) return NotFound("Unable to find task");
 
-            return BadRequest("Unable to update the task");
+            _mapper.Map(userTasks, task);
+
+            if (await _taskRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Unable to save Task");
         }
     }
 }
