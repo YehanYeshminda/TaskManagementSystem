@@ -17,5 +17,6 @@ namespace API.Entities
         public Department Departments { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
         public ICollection<UserTasks> UserTasks { get; set; }
+        public ICollection<Grn> Grns { get; set; }
     }
 }

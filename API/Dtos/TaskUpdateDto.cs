@@ -1,9 +1,8 @@
-using API.Entities;
-
 namespace API.Dtos
 {
-    public class TaskDto
+    public class TaskUpdateDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string CustomerDetails { get; set; }
@@ -16,6 +15,5 @@ namespace API.Dtos
         public string AppUserName { get; set; }
         public string UnitName { get; set; }
         public string ProductName { get; set; }
-        public List<TaskMaterial> TaskMaterials { get; set; }
     }
 }

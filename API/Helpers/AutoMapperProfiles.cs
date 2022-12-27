@@ -12,6 +12,7 @@ namespace API.Helpers
             CreateMap<RegisterDto, AppUser>();
             CreateMap<Unit, UnitDto>();
             CreateMap<UserTasks, TaskDto>().ForMember(s => s.AppUserName, opt => opt.MapFrom(s => s.AppUser.UserName));
+            CreateMap<UserTasks, TaskUpdateDto>();
         }
     }
 }

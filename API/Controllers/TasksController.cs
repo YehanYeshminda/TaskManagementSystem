@@ -80,5 +80,15 @@ namespace API.Controllers
         {
             return Ok(await _taskRepository.GetTasks());
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateTask(TaskUpdateDto taskUpdateDto)
+        {
+            var task = _taskRepository.GetTasksFromId(taskUpdateDto.Id);
+
+            if (await _taskRepository.SaveAllAsync()) return Ok("Task has been updated");
+
+            return BadRequest("Unable to update the task");
+        }
     }
 }

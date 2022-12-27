@@ -20,6 +20,8 @@ namespace API.Data
         public DbSet<Materials> Materials { get; set;}
         public DbSet<MaterialType> MaterialTypes { get; set;}
         public DbSet<TaskMaterial> taskMaterials { get; set;}
+        public DbSet<Grn> Grns { get; set;}
+        public DbSet<Inventory> Inventories { get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
