@@ -16,5 +16,6 @@ namespace API.Dtos
         public string AppUserName { get; set; }
         public string UnitName { get; set; }
         public string ProductName { get; set; }
+        // public List<TaskMaterial> TaskMaterials { get; set; }
     }
 }

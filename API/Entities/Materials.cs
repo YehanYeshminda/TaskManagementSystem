@@ -12,6 +12,7 @@ namespace API.Entities
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-        public MaterialType MaterialType { get; set; }        
+        public MaterialType MaterialType { get; set; }
+        public ICollection<TaskMaterial> TaskMaterials { get; set; }        
     }
 }

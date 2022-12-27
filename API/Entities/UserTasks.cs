@@ -18,5 +18,6 @@ namespace API.Entities
         public AppUser AppUser { get; set; }
         public Unit Unit { get; set; }
         public Product Product { get; set; }
+        public ICollection<TaskMaterial> TaskMaterials { get; set; }
     }
 }

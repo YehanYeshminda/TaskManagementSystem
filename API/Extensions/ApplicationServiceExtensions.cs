@@ -20,6 +20,8 @@ namespace API.Extensions
             services.AddScoped<IUnitRepository, UnitRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IWorkshopRepository, WorkshopRepository>();
+            services.AddScoped<ITaskMaterialRepository, TaskMaterialRepository>();
+            services.AddScoped<IMaterialRepository, MaterialRepository>();
 
             services.AddControllers().AddJsonOptions(options =>
             {
