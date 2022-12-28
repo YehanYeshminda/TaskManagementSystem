@@ -45,6 +45,14 @@ namespace API.Data
                 await userManager.AddToRoleAsync(user, "Member"); // this will be the default role
             }
 
+            var member = new AppUser
+            {
+                UserName = "Member"
+            };
+
+            await userManager.CreateAsync(member, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(member, new[] { "Member" });
+
             var wordshopSupervisor = new AppUser
             {
                 UserName = "WorkshopUnitSupervisor"
@@ -52,6 +60,70 @@ namespace API.Data
 
             await userManager.CreateAsync(wordshopSupervisor, "Pa$$w0rd");
             await userManager.AddToRolesAsync(wordshopSupervisor, new[] { "WorkshopAndUnitSupervisor" });
+
+            var admin = new AppUser
+            {
+                UserName = "Admin"
+            };
+
+            await userManager.CreateAsync(admin, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(admin, new[] { "Admin" });
+
+            var departmentSupervisor = new AppUser
+            {
+                UserName = "DepartmentSupervisor"
+            };
+
+            await userManager.CreateAsync(departmentSupervisor, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(departmentSupervisor, new[] { "DepartmentSupervisor" });
+
+            var engineeringDepartmentManager = new AppUser
+            {
+                UserName = "EngineeringDepartmentManager"
+            };
+
+            await userManager.CreateAsync(engineeringDepartmentManager, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(engineeringDepartmentManager, new[] { "EngineeringDepartmentManager" });
+
+            var salesMarketingDepartmentManager = new AppUser
+            {
+                UserName = "SalesMarketingDepartmentManager"
+            };
+
+            await userManager.CreateAsync(salesMarketingDepartmentManager, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(salesMarketingDepartmentManager, new[] { "SalesMarketingDepartmentManager" });
+
+            var purchasingDepartmentManager = new AppUser
+            {
+                UserName = "PurchasingDepartmentManager"
+            };
+
+            await userManager.CreateAsync(purchasingDepartmentManager, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(purchasingDepartmentManager, new[] { "PurchasingDepartmentManager" });
+
+            var financeDepartmentManager = new AppUser
+            {
+                UserName = "FinanceDepartmentManager"
+            };
+
+            await userManager.CreateAsync(financeDepartmentManager, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(financeDepartmentManager, new[] { "FinanceDepartmentManager" });
+
+            var hRDepartmentManager = new AppUser
+            {
+                UserName = "HRDepartmentManager"
+            };
+
+            await userManager.CreateAsync(hRDepartmentManager, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(hRDepartmentManager, new[] { "HRDepartmentManager" });
+
+            var factoryManagementDepartmentManager = new AppUser
+            {
+                UserName = "FactoryManagementDepartmentManager"
+            };
+
+            await userManager.CreateAsync(factoryManagementDepartmentManager, "Pa$$w0rd");
+            await userManager.AddToRolesAsync(factoryManagementDepartmentManager, new[] { "FactoryManagementDepartmentManager" });
         }
 
 
@@ -172,6 +244,19 @@ namespace API.Data
                 }
 
 
+                if (!context.Grns.Any())
+                {
+                    var appUser = await context.AppUsers.FindAsync(1);
+                    context.Grns.AddRange(new Grn()
+                    {
+                        GrnNo = "Number 1",
+                        AppUser = appUser,
+                        GrnDate = DateTime.Today,
+                        CreatedAt = DateTime.Now,
+                    });
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
     }
