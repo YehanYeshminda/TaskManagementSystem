@@ -3,10 +3,12 @@ using API.Entities;
 using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class InventoryController : BaseApiController
     {
         private readonly IInventoryRepository _inventoryRepository;
