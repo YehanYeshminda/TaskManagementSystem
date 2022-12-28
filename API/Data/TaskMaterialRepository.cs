@@ -44,5 +44,10 @@ namespace API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public void Update (TaskMaterial taskMaterial)
+        {
+            _context.Entry(taskMaterial).State = EntityState.Modified;
+        }
     }
 }

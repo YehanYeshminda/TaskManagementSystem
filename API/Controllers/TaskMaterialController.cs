@@ -2,6 +2,7 @@ using API.Dtos;
 using API.Entities;
 using API.Helpers;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -11,8 +12,10 @@ namespace API.Controllers
         private readonly ITaskMaterialRepository _taskMaterialRepository;
         private readonly ITaskRepository _taskRepository;
         private readonly IMaterialRepository _materialRepository;
-        public TaskMaterialController(ITaskMaterialRepository taskMaterialRepository, ITaskRepository taskRepository, IMaterialRepository materialRepository)
+        private readonly IMapper _mapper;
+        public TaskMaterialController(ITaskMaterialRepository taskMaterialRepository, ITaskRepository taskRepository, IMaterialRepository materialRepository, IMapper mapper)
         {
+            _mapper = mapper;
             _materialRepository = materialRepository;
             _taskRepository = taskRepository;
             _taskMaterialRepository = taskMaterialRepository;
@@ -47,6 +50,20 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<TaskMaterial>>> GetTasks()
         {
             return Ok(await _taskMaterialRepository.GetTaskMaterials());
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateTaskMaterial([FromBody]UpdateTaskMaterialDto updateTaskMaterialDto, [FromRoute]int id)
+        {
+            var taskMaterial= await _taskMaterialRepository.GetTaskMaterialsFromId(id);
+
+            if (taskMaterial== null) return NotFound("Unable to find Task material item");
+
+            _mapper.Map(updateTaskMaterialDto, taskMaterial);
+
+            if (await _taskMaterialRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Unable to Update Task material item");
         }
     }
 }

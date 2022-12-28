@@ -2,6 +2,7 @@ using API.Dtos;
 using API.Entities;
 using API.Helpers;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -11,8 +12,10 @@ namespace API.Controllers
         private readonly IInventoryRepository _inventoryRepository;
         private readonly IMaterialRepository _materialRepository;
         private readonly IGrnRepository _grnRepository;
-        public InventoryController(IInventoryRepository inventoryRepository, IMaterialRepository materialRepository, IGrnRepository grnRepository)
+        private readonly IMapper _mapper;
+        public InventoryController(IInventoryRepository inventoryRepository, IMaterialRepository materialRepository, IGrnRepository grnRepository, IMapper mapper)
         {
+            _mapper = mapper;
             _grnRepository = grnRepository;
             _materialRepository = materialRepository;
             _inventoryRepository = inventoryRepository;
@@ -54,6 +57,20 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Inventory>>> GetInventoryByIdAsync(int id)
         {
             return Ok(await _inventoryRepository.GetInventoryFromId(id));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateInventory([FromBody]InventoryDto inventory, [FromRoute]int id)
+        {
+            var inventoryItem = await _inventoryRepository.GetInventoryFromId(id);
+
+            if (inventoryItem == null) return NotFound("Unable to find inventory item");
+
+            _mapper.Map(inventory, inventoryItem);
+
+            if (await _inventoryRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Unable to Update Inventory item");
         }
     }
 }
