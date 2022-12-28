@@ -14,12 +14,26 @@ namespace API.Data
 
         public async Task<Department> GetDepartmentByIdAsync(int id)
         {
-            return await _context.Departments.FindAsync(id);
+            return await _context.Departments
+            .Include(s => s.AppUsers)
+            .Include(s => s.WorkShops)
+            .Include(s => s.UserTasks)
+            .Include(s => s.Units)
+            .Include(s => s.Companys)
+            .Include(s => s.Factorys)
+            .SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Department>> GetDepartments()
         {
-            return await _context.Departments.ToListAsync();
+            return await _context.Departments
+            .Include(s => s.AppUsers)
+            .Include(s => s.WorkShops)
+            .Include(s => s.UserTasks)
+            .Include(s => s.Units)
+            .Include(s => s.Companys)
+            .Include(s => s.Factorys)
+            .ToListAsync();
         }
     }
 }

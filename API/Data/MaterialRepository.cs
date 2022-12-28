@@ -1,5 +1,6 @@
 using API.Entities;
 using API.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
@@ -13,7 +14,10 @@ namespace API.Data
 
         public async Task<Materials> GetMaterialByIdAsync(int id)
         {
-            return await _context.Materials.FindAsync(id);
+            return await _context.Materials
+            .Include(s => s.MaterialType)
+            .Include(s => s.TaskMaterials)
+            .SingleOrDefaultAsync(s => s.Id == id);
         }
     }
 }

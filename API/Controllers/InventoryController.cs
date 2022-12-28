@@ -49,5 +49,11 @@ namespace API.Controllers
         {
             return Ok(await _inventoryRepository.GetInventory());
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<Inventory>>> GetInventoryByIdAsync(int id)
+        {
+            return Ok(await _inventoryRepository.GetInventoryFromId(id));
+        }
     }
 }

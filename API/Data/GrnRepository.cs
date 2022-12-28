@@ -14,12 +14,16 @@ namespace API.Data
 
         public async Task<Grn> GetGrnByIdAsync(int id)
         {
-            return await _context.Grns.FindAsync(id);
+            return await _context.Grns
+            .Include(s => s.AppUser)
+            .SingleOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Grn>> GetGrns()
         {
-            return await _context.Grns.ToListAsync();
+            return await _context.Grns
+            .Include(s => s.AppUser)
+            .ToListAsync();
         }
     }
 }
