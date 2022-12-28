@@ -10,6 +10,5 @@ namespace API.Dtos
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public int ProductId { get; set; }
     }
 }

@@ -12,6 +12,14 @@ namespace API.Data
             _context = context;
         }
 
+        public async Task<IEnumerable<Materials>> GetMaterials()
+        {
+            return await _context.Materials
+            .Include(s => s.MaterialType).ThenInclude(s => s.Materials)
+            .Include(s => s.TaskMaterials)
+            .ToListAsync();
+        }
+
         public async Task<Materials> GetMaterialByIdAsync(int id)
         {
             return await _context.Materials
