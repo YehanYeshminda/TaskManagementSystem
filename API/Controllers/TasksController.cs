@@ -70,7 +70,7 @@ namespace API.Controllers
 
             _taskRepository.AddTask(newTask);
 
-            if (await _taskRepository.SaveAllAsync()) return Ok("Data has been inserted");
+            if (await _taskRepository.SaveAllAsync()) return Ok(newTask);
 
             return BadRequest("Failed to save a Task!");
         }
