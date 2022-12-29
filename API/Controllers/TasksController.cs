@@ -109,7 +109,7 @@ namespace API.Controllers
 
             _context.Entry(task).CurrentValues.SetValues(updatedObj);
 
-            await _context.SaveChangesAsync();
+            if (await _context.SaveChangesAsync() > 0) return NoContent();
 
             return BadRequest("Unable to Update Task");
         }
