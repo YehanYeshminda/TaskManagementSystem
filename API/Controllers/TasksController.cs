@@ -1,3 +1,4 @@
+using API.Data;
 using API.Dtos;
 using API.Entities;
 using API.Extensions;
@@ -19,8 +20,10 @@ namespace API.Controllers
         private readonly IWorkshopRepository _workshopRepository;
         private readonly IProductRepository _productRepository;
         private readonly IUnitRepository _unitRepository;
-        public TasksController(IUserRepository userRepository, IMapper mapper, ITaskRepository taskRepository, IDepartmentRepository departmentRepository, IWorkshopRepository workshopRepository, IProductRepository productRepository, IUnitRepository unitRepository)
+        private readonly DataContext _context;
+        public TasksController(IUserRepository userRepository, IMapper mapper, ITaskRepository taskRepository, IDepartmentRepository departmentRepository, IWorkshopRepository workshopRepository, IProductRepository productRepository, IUnitRepository unitRepository, DataContext context)
         {
+            _context = context;
             _unitRepository = unitRepository;
             _productRepository = productRepository;
             _workshopRepository = workshopRepository;
@@ -28,6 +31,7 @@ namespace API.Controllers
             _taskRepository = taskRepository;
             _mapper = mapper;
             _userRepository = userRepository;
+
         }
 
         [HttpPost]
@@ -81,6 +85,19 @@ namespace API.Controllers
             return Ok(await _taskRepository.GetTasks());
         }
 
+        public static TaskUpdateDto CheckupdatedObject(UserTasks original, TaskUpdateDto updatedObj)
+        {
+            foreach (var property in updatedObj.GetType().GetProperties())
+            {
+                if (property.GetValue(updatedObj, null) == null)
+                {
+                    property.SetValue(updatedObj, updatedObj.GetType().GetProperty(property.Name)
+                    .GetValue(updatedObj, null));
+                }
+            }
+            return updatedObj;
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTask([FromBody]TaskUpdateDto userTasks, [FromRoute]int id)
         {
@@ -88,9 +105,11 @@ namespace API.Controllers
 
             if (task == null) return NotFound("Unable to find task");
 
-            _mapper.Map(userTasks, task);
+            var updatedObj = (TaskUpdateDto) CheckupdatedObject(task, userTasks);
 
-            if (await _taskRepository.SaveAllAsync()) return NoContent();
+            _context.Entry(task).CurrentValues.SetValues(updatedObj);
+
+            if (await _context.SaveChangesAsync() > 0) return NoContent();
 
             return BadRequest("Unable to Update Task");
         }

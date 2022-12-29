@@ -193,6 +193,7 @@ namespace API.Data
                         Description = "this is description material",
                         CreatedAt = DateTime.Now,
                         Price = 100,
+                        Qty = 10,
                         ReOrderLevel = 20,
                         UOM = "this is the uom",
                         MaterialType = new MaterialType()
@@ -211,6 +212,7 @@ namespace API.Data
                         Description = "this is description material",
                         CreatedAt = DateTime.Now,
                         Price = 100,
+                        Qty = 10,
                         ReOrderLevel = 20,
                         UOM = "this is the uom",
                         MaterialType = new MaterialType()
@@ -229,6 +231,7 @@ namespace API.Data
                         Description = "this is description material",
                         CreatedAt = DateTime.Now,
                         Price = 100,
+                        Qty = 10,
                         ReOrderLevel = 30,
                         UOM = "this is the uom",
                         MaterialType = new MaterialType()

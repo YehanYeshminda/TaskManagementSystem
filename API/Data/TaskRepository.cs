@@ -50,10 +50,5 @@ namespace API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
-
-        public void Update (UserTasks userTasks)
-        {
-            _context.Entry(userTasks).State = EntityState.Modified;
-        }
     }
 }
