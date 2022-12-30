@@ -34,7 +34,7 @@ namespace API.Data
             .Include(a => a.AppUser)
             .Include(u => u.Unit)
             .Include(p => p.Product)
-            .Include(s => s.TaskMaterials)
+            .Include(s => s.TaskMaterials).ThenInclude(s => s.Materials)
             .OrderBy(c => c.CreatedAt)
             .ToListAsync();
 
