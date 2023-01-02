@@ -260,6 +260,143 @@ namespace API.Data
 
                     await context.SaveChangesAsync();
                 }
+
+                if (!context.UserTasks.Any())
+                {
+                    var department = await context.Departments.FindAsync(1);
+                    var workShop = await context.WorkShops.FindAsync(1);
+                    var appUser = await context.AppUsers.FindAsync(1);
+                    var unit = await context.Unit.FindAsync(1);
+                    var product = await context.Product.FindAsync(1);
+
+                    context.UserTasks.AddRange(new UserTasks()
+                    {
+                        Name = "Task 1",
+                        Description = "this is the description",
+                        CustomerDetails = "this is the customer details",
+                        Qty = 1,
+                        Status = "todo",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        CreatedAt = DateTime.Now,
+                        Department = department,
+                        WorkShop = workShop,
+                        AppUser = appUser,
+                        Unit = unit,
+                        Product = product,
+                    });
+
+                    context.UserTasks.AddRange(new UserTasks()
+                    {
+                        Name = "Task 2",
+                        Description = "this is the description",
+                        CustomerDetails = "this is the customer details",
+                        Qty = 100,
+                        Status = "todo",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        CreatedAt = DateTime.Now,
+                        Department = department,
+                        WorkShop = workShop,
+                        AppUser = appUser,
+                        Unit = unit,
+                        Product = product,
+                    });
+
+                    context.UserTasks.AddRange(new UserTasks()
+                    {
+                        Name = "Task 3",
+                        Description = "this is the description",
+                        CustomerDetails = "this is the customer details",
+                        Qty = 100,
+                        Status = "todo",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        CreatedAt = DateTime.Now,
+                        Department = department,
+                        WorkShop = workShop,
+                        AppUser = appUser,
+                        Unit = unit,
+                        Product = product,
+                    });
+
+                    context.UserTasks.AddRange(new UserTasks()
+                    {
+                        Name = "Task 4",
+                        Description = "this is the description",
+                        CustomerDetails = "this is the customer details",
+                        Qty = 100,
+                        Status = "todo",
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.Now,
+                        CreatedAt = DateTime.Now,
+                        Department = department,
+                        WorkShop = workShop,
+                        AppUser = appUser,
+                        Unit = unit,
+                        Product = product,
+                    });
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.TaskEmployees.Any())
+                {
+                    var appuser = await context.AppUsers.FindAsync(1);
+                    var userTask = await context.UserTasks.FindAsync(1);
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now, 
+                    });
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now, 
+                    });
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now, 
+                    });
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now, 
+                    });
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now, 
+                    });
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.TaskEmployees.Any())
+                {
+                    var appuser = await context.AppUsers.FindAsync(1);
+                    var userTask = await context.UserTasks.FindAsync(1);
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now, 
+                    });
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
     }

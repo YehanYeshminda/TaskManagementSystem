@@ -35,6 +35,7 @@ namespace API.Data
             .Include(u => u.Unit)
             .Include(p => p.Product)
             .Include(s => s.TaskMaterials).ThenInclude(s => s.Materials)
+            .Where(s => s.DeletedAt == null)
             .OrderBy(c => c.CreatedAt)
             .ToListAsync();
 
@@ -50,5 +51,7 @@ namespace API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
+        
     }
 }

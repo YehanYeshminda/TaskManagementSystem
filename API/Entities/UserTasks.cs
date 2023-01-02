@@ -19,5 +19,6 @@ namespace API.Entities
         public Unit Unit { get; set; }
         public Product Product { get; set; }
         public ICollection<TaskMaterial> TaskMaterials { get; set; }
+        public ICollection<TaskEmployee> TaskEmployees { get; set; }
     }
 }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
     public class TasksController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
@@ -21,8 +20,10 @@ namespace API.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IUnitRepository _unitRepository;
         private readonly DataContext _context;
-        public TasksController(IUserRepository userRepository, IMapper mapper, ITaskRepository taskRepository, IDepartmentRepository departmentRepository, IWorkshopRepository workshopRepository, IProductRepository productRepository, IUnitRepository unitRepository, DataContext context)
+        private readonly ITaskEmployeeRepository _taskEmployeeRepository;
+        public TasksController(IUserRepository userRepository, IMapper mapper, ITaskRepository taskRepository, IDepartmentRepository departmentRepository, IWorkshopRepository workshopRepository, IProductRepository productRepository, IUnitRepository unitRepository, ITaskEmployeeRepository taskEmployeeRepository, DataContext context)
         {
+            _taskEmployeeRepository = taskEmployeeRepository;
             _context = context;
             _unitRepository = unitRepository;
             _productRepository = productRepository;
@@ -33,7 +34,7 @@ namespace API.Controllers
             _userRepository = userRepository;
 
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<TaskDto>> CreateTask(TaskParams taskParams)
         {
@@ -98,6 +99,19 @@ namespace API.Controllers
             return updatedObj;
         }
 
+        public static UserTaskDeleteUpdateDto CheckupdatedObjectDelete(UserTasks original, UserTaskDeleteUpdateDto updatedObj)
+        {
+            foreach (var property in updatedObj.GetType().GetProperties())
+            {
+                if (property.GetValue(updatedObj, null) == null)
+                {
+                    property.SetValue(updatedObj, updatedObj.GetType().GetProperty(property.Name)
+                    .GetValue(updatedObj, null));
+                }
+            }
+            return updatedObj;
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTask([FromBody]TaskUpdateDto userTasks, [FromRoute]int id)
         {
@@ -106,6 +120,47 @@ namespace API.Controllers
             if (task == null) return NotFound("Unable to find task");
 
             var updatedObj = (TaskUpdateDto) CheckupdatedObject(task, userTasks);
+
+            _context.Entry(task).CurrentValues.SetValues(updatedObj);
+
+            if (await _context.SaveChangesAsync() > 0) return NoContent();
+
+            return BadRequest("Unable to Update Task");
+        }
+
+        [HttpPost("taskEmp")]
+        public async Task<ActionResult<TaskEmployee>> AssignEmployeeTask(AssignEmployeeTaskParams assignEmployeeTaskParams)
+        {
+            var username = User.GetUsername();
+            var userId = User.GetUserId();
+
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            if (user == null) return NotFound( "Unable to find user" );
+
+            var task = await _taskRepository.GetTasksFromId(assignEmployeeTaskParams.UserTasksId);
+            
+            var newTaskEmloyee = new TaskEmployee
+            {
+                AppUser = user,
+                UserTasks = task,
+                CreatedAt = DateTime.Now
+            };
+
+            _taskEmployeeRepository.AddTaskEmployee(newTaskEmloyee);
+
+            if (await _taskRepository.SaveAllAsync()) return Ok(newTaskEmloyee);
+
+            return BadRequest("Failed to save a Task Employee!");
+        }
+
+        [HttpPut("delete/{id}")]
+        public async Task<IActionResult> DeleteTask([FromBody]UserTaskDeleteUpdateDto userTasks, [FromRoute]int id)
+        {
+            var task = await _taskRepository.GetTasksFromId(id);
+
+            if (task == null) return NotFound("Unable to find task to delete");
+
+            var updatedObj = (UserTaskDeleteUpdateDto) CheckupdatedObjectDelete(task, userTasks);
 
             _context.Entry(task).CurrentValues.SetValues(updatedObj);
 
