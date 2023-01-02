@@ -99,19 +99,6 @@ namespace API.Controllers
             return updatedObj;
         }
 
-        public static UserTaskDeleteUpdateDto CheckupdatedObjectDelete(UserTasks original, UserTaskDeleteUpdateDto updatedObj)
-        {
-            foreach (var property in updatedObj.GetType().GetProperties())
-            {
-                if (property.GetValue(updatedObj, null) == null)
-                {
-                    property.SetValue(updatedObj, updatedObj.GetType().GetProperty(property.Name)
-                    .GetValue(updatedObj, null));
-                }
-            }
-            return updatedObj;
-        }
-
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTask([FromBody]TaskUpdateDto userTasks, [FromRoute]int id)
         {
@@ -122,6 +109,20 @@ namespace API.Controllers
             var updatedObj = (TaskUpdateDto) CheckupdatedObject(task, userTasks);
 
             _context.Entry(task).CurrentValues.SetValues(updatedObj);
+
+            if (await _context.SaveChangesAsync() > 0) return NoContent();
+
+            return BadRequest("Unable to Update Task");
+        }
+
+        [HttpPut("delete/{id}")]
+        public async Task<ActionResult> DeleteTask([FromRoute]int id)
+        {
+            var task = await _taskRepository.GetTasksFromId(id);
+
+            if (task == null) return NotFound("Unable to find task");
+
+            _context.Entry(task).CurrentValues.SetValues(task.DeletedAt = DateTime.Now);
 
             if (await _context.SaveChangesAsync() > 0) return NoContent();
 
@@ -151,22 +152,6 @@ namespace API.Controllers
             if (await _taskRepository.SaveAllAsync()) return Ok(newTaskEmloyee);
 
             return BadRequest("Failed to save a Task Employee!");
-        }
-
-        [HttpPut("delete/{id}")]
-        public async Task<IActionResult> DeleteTask([FromBody]UserTaskDeleteUpdateDto userTasks, [FromRoute]int id)
-        {
-            var task = await _taskRepository.GetTasksFromId(id);
-
-            if (task == null) return NotFound("Unable to find task to delete");
-
-            var updatedObj = (UserTaskDeleteUpdateDto) CheckupdatedObjectDelete(task, userTasks);
-
-            _context.Entry(task).CurrentValues.SetValues(updatedObj);
-
-            if (await _context.SaveChangesAsync() > 0) return NoContent();
-
-            return BadRequest("Unable to Update Task");
         }
     }
 }
