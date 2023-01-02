@@ -164,7 +164,7 @@ namespace API.Data
                             PhoneNumber = "123456",
                             Email = "test@gmail.com",
                             CreatedAt = DateTime.Now,
-                        }
+                        },
                     });
 
                     await context.SaveChangesAsync();
@@ -172,6 +172,8 @@ namespace API.Data
 
                 if (!context.WorkShops.Any())
                 {
+                    var department = await context.Departments.FindAsync(1);
+
                     context.WorkShops.AddRange(new WorkShop()
                     {
                         Name = "WorkShop 1",
@@ -179,11 +181,32 @@ namespace API.Data
                         Telephone = "123",
                         Email = "test@gmail.com",
                         CreatedAt = DateTime.Now,
+                        Department = department,
+                    });
+
+                    context.WorkShops.AddRange(new WorkShop()
+                    {
+                        Name = "WorkShop 2",
+                        Description = "this is a new work shop",
+                        Telephone = "123",
+                        Email = "test@gmail.com",
+                        CreatedAt = DateTime.Now,
+                        Department = department,
+                    });
+
+                    context.WorkShops.AddRange(new WorkShop()
+                    {
+                        Name = "WorkShop 3",
+                        Description = "this is a new work shop",
+                        Telephone = "123",
+                        Email = "test@gmail.com",
+                        CreatedAt = DateTime.Now,
+                        Department = department,
                     });
 
                     await context.SaveChangesAsync();
                 }
-                
+
                 if (!context.Materials.Any())
                 {
                     context.Materials.AddRange(new Materials()
@@ -246,7 +269,6 @@ namespace API.Data
                     await context.SaveChangesAsync();
                 }
 
-
                 if (!context.Grns.Any())
                 {
                     var appUser = await context.AppUsers.FindAsync(1);
@@ -256,6 +278,74 @@ namespace API.Data
                         AppUser = appUser,
                         GrnDate = DateTime.Today,
                         CreatedAt = DateTime.Now,
+                    });
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.Inventories.Any())
+                {
+                    var material = await context.Materials.FindAsync(1);
+                    var grn = await context.Grns.FindAsync(1);
+
+                    context.Inventories.AddRange(new Inventory()
+                    {
+                        Qty = 10,
+                        AvailableQty = 10,
+                        UnitCost = 100,
+                        CreatedAt = DateTime.Now,
+                        Materials = material,
+                        Grn = grn,
+                    });
+
+                    context.Inventories.AddRange(new Inventory()
+                    {
+                        Qty = 10,
+                        AvailableQty = 10,
+                        UnitCost = 100,
+                        CreatedAt = DateTime.Now,
+                        Materials = material,
+                        Grn = grn,
+                    });
+
+                    context.Inventories.AddRange(new Inventory()
+                    {
+                        Qty = 10,
+                        AvailableQty = 10,
+                        UnitCost = 100,
+                        CreatedAt = DateTime.Now,
+                        Materials = material,
+                        Grn = grn,
+                    });
+
+                    context.Inventories.AddRange(new Inventory()
+                    {
+                        Qty = 10,
+                        AvailableQty = 10,
+                        UnitCost = 100,
+                        CreatedAt = DateTime.Now,
+                        Materials = material,
+                        Grn = grn,
+                    });
+
+                    context.Inventories.AddRange(new Inventory()
+                    {
+                        Qty = 10,
+                        AvailableQty = 10,
+                        UnitCost = 100,
+                        CreatedAt = DateTime.Now,
+                        Materials = material,
+                        Grn = grn,
+                    });
+
+                    context.Inventories.AddRange(new Inventory()
+                    {
+                        Qty = 10,
+                        AvailableQty = 10,
+                        UnitCost = 100,
+                        CreatedAt = DateTime.Now,
+                        Materials = material,
+                        Grn = grn,
                     });
 
                     await context.SaveChangesAsync();
@@ -349,50 +439,35 @@ namespace API.Data
                     {
                         AppUser = appuser,
                         UserTasks = userTask,
-                        CreatedAt = DateTime.Now, 
+                        CreatedAt = DateTime.Now,
                     });
 
                     context.TaskEmployees.AddRange(new TaskEmployee()
                     {
                         AppUser = appuser,
                         UserTasks = userTask,
-                        CreatedAt = DateTime.Now, 
+                        CreatedAt = DateTime.Now,
                     });
 
                     context.TaskEmployees.AddRange(new TaskEmployee()
                     {
                         AppUser = appuser,
                         UserTasks = userTask,
-                        CreatedAt = DateTime.Now, 
+                        CreatedAt = DateTime.Now,
                     });
 
                     context.TaskEmployees.AddRange(new TaskEmployee()
                     {
                         AppUser = appuser,
                         UserTasks = userTask,
-                        CreatedAt = DateTime.Now, 
+                        CreatedAt = DateTime.Now,
                     });
 
                     context.TaskEmployees.AddRange(new TaskEmployee()
                     {
                         AppUser = appuser,
                         UserTasks = userTask,
-                        CreatedAt = DateTime.Now, 
-                    });
-
-                    await context.SaveChangesAsync();
-                }
-
-                if (!context.TaskEmployees.Any())
-                {
-                    var appuser = await context.AppUsers.FindAsync(1);
-                    var userTask = await context.UserTasks.FindAsync(1);
-
-                    context.TaskEmployees.AddRange(new TaskEmployee()
-                    {
-                        AppUser = appuser,
-                        UserTasks = userTask,
-                        CreatedAt = DateTime.Now, 
+                        CreatedAt = DateTime.Now,
                     });
 
                     await context.SaveChangesAsync();

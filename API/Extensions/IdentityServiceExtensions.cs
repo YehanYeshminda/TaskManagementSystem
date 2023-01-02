@@ -30,6 +30,17 @@ namespace API.Extensions
                 };
             });
 
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("RequiredDepartmentSupervisor", policy => policy.RequireRole("DepartmentSupervisor"));
+                opt.AddPolicy("RequiredWorkshopAndUnitSupervisor", policy => policy.RequireRole("WorkshopAndUnitSupervisor"));
+                opt.AddPolicy("RequiredSalesMarketingDepartmentManager", policy => policy.RequireRole("SalesMarketingDepartmentManager"));
+                opt.AddPolicy("RequiredPurchasingFinanceManager", policy => policy.RequireRole("FinanceDepartmentManager", "PurchasingDepartmentManager"));
+                opt.AddPolicy("RequiredHRDepartmentManager", policy => policy.RequireRole("HRDepartmentManager"));
+                opt.AddPolicy("RequiredEngineeringDepartmentManager", policy => policy.RequireRole("EngineeringDepartmentManager"));
+                opt.AddPolicy("RequiredFactoryManagementDepartmentManager", policy => policy.RequireRole("FactoryManagementDepartmentManager"));
+            });
+
             return services;
         }
     }

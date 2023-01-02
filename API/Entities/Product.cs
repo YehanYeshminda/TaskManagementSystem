@@ -11,5 +11,6 @@ namespace API.Entities
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
         public ICollection<UserTasks> UserTasks { get; set; }
+        public ICollection<EmployeeKpi> EmployeeKpis { get; set; }
     }
 }

@@ -34,7 +34,8 @@ namespace API.Controllers
             _userRepository = userRepository;
 
         }
-        [Authorize(Roles = "Admin")]
+
+        [Authorize(Policy = "RequiredDepartmentSupervisor")]
         [HttpPost]
         public async Task<ActionResult<TaskDto>> CreateTask(TaskParams taskParams)
         {
@@ -99,6 +100,7 @@ namespace API.Controllers
             return updatedObj;
         }
 
+        [Authorize(Policy = "RequiredDepartmentSupervisor")]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateTask([FromBody]TaskUpdateDto userTasks, [FromRoute]int id)
         {
@@ -115,6 +117,7 @@ namespace API.Controllers
             return BadRequest("Unable to Update Task");
         }
 
+        [Authorize(Policy = "RequiredDepartmentSupervisor")]
         [HttpPut("delete/{id}")]
         public async Task<ActionResult> DeleteTask([FromRoute]int id)
         {
@@ -129,6 +132,7 @@ namespace API.Controllers
             return BadRequest("Unable to Update Task");
         }
 
+        [Authorize(Policy = "RequiredDepartmentSupervisor")]
         [HttpPost("taskEmp")]
         public async Task<ActionResult<TaskEmployee>> AssignEmployeeTask(AssignEmployeeTaskParams assignEmployeeTaskParams)
         {

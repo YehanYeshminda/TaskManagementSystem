@@ -23,6 +23,7 @@ namespace API.Data
         public DbSet<Grn> Grns { get; set;}
         public DbSet<Inventory> Inventories { get; set;}
         public DbSet<TaskEmployee> TaskEmployees { get; set;}
+        public DbSet<EmployeeKpi> EmployeeKpis { get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
