@@ -25,6 +25,7 @@ namespace API.Extensions
             services.AddScoped<IGrnRepository, GrnRepository>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();
             services.AddScoped<ITaskEmployeeRepository, TaskEmployeeRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
             services.AddControllers().AddJsonOptions(options =>
             {

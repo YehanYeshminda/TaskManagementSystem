@@ -127,7 +127,7 @@ namespace API.Data
         }
 
 
-        public static async void SeedInformation(ApplicationBuilder applicationBuilder)
+        public static async void SeedInformation(ApplicationBuilder applicationBuilder, RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
@@ -433,6 +433,7 @@ namespace API.Data
                 if (!context.TaskEmployees.Any())
                 {
                     var appuser = await context.AppUsers.FindAsync(1);
+                    var appuser2 = await context.AppUsers.FindAsync(3);
                     var userTask = await context.UserTasks.FindAsync(1);
 
                     context.TaskEmployees.AddRange(new TaskEmployee()
@@ -468,6 +469,30 @@ namespace API.Data
                         AppUser = appuser,
                         UserTasks = userTask,
                         CreatedAt = DateTime.Now,
+                    });
+
+                    context.TaskEmployees.AddRange(new TaskEmployee()
+                    {
+                        AppUser = appuser2,
+                        UserTasks = userTask,
+                        CreatedAt = DateTime.Now,
+                    });
+
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.EmployeeKpis.Any())
+                {
+                    var user = await context.AppUsers.FindAsync(1);
+                    var product = await context.Product.FindAsync(1);
+
+                    context.EmployeeKpis.AddRange(new EmployeeKpi()
+                    {
+                        AppUser = user,
+                        Product = product,
+                        DailyTarget = 1000,
+                        MonthlyTarget = 10000,
+                        WeeklyTarget = 100000
                     });
 
                     await context.SaveChangesAsync();

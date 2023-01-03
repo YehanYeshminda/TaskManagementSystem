@@ -6,7 +6,7 @@ namespace API.Entities
         public decimal DailyTarget { get; set; }
         public decimal WeeklyTarget { get; set; }
         public decimal MonthlyTarget { get; set; }
-        public AppUserRole UserRoles { get; set; }
+        public AppUser AppUser { get; set; }
         public Product Product { get; set; }
     }
 }

@@ -136,26 +136,35 @@ namespace API.Controllers
         [HttpPost("taskEmp")]
         public async Task<ActionResult<TaskEmployee>> AssignEmployeeTask(AssignEmployeeTaskParams assignEmployeeTaskParams)
         {
-            var username = User.GetUsername();
-            var userId = User.GetUserId();
-
-            var user = await _userRepository.GetUserByIdAsync(userId);
+            var user = await _userRepository.GetUserByIdAsync(assignEmployeeTaskParams.AppUserId);
             if (user == null) return NotFound( "Unable to find user" );
 
             var task = await _taskRepository.GetTasksFromId(assignEmployeeTaskParams.UserTasksId);
             
-            var newTaskEmloyee = new TaskEmployee
+            var newTaskEmployee = new TaskEmployee
             {
                 AppUser = user,
                 UserTasks = task,
                 CreatedAt = DateTime.Now
             };
 
-            _taskEmployeeRepository.AddTaskEmployee(newTaskEmloyee);
+            _taskEmployeeRepository.AddTaskEmployee(newTaskEmployee);
 
-            if (await _taskRepository.SaveAllAsync()) return Ok(newTaskEmloyee);
+            if (await _taskRepository.SaveAllAsync()) return Ok(newTaskEmployee);
 
             return BadRequest("Failed to save a Task Employee!");
+        }
+        
+        [HttpGet("taskEmp")]
+        public async Task<ActionResult<IEnumerable<TaskEmployee>>> GetTaskEmployees()
+        {
+            return Ok(await _taskEmployeeRepository.GetTaskEmployees());
+        }
+
+        [HttpGet("taskEmpDateFilter")]
+        public async Task<ActionResult<IEnumerable<UserTasks>>> GetTaskEmployeeFilter(TaskEmployeeFilterParams taskEmployeeFilterParams)
+        {
+            return Ok(await _taskEmployeeRepository.GetTaskEmployeesFilter(taskEmployeeFilterParams));
         }
     }
 }

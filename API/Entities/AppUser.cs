@@ -19,5 +19,6 @@ namespace API.Entities
         public ICollection<UserTasks> UserTasks { get; set; }
         public ICollection<Grn> Grns { get; set; }
         public ICollection<TaskEmployee> TaskEmployees { get; set; }
+        public ICollection<EmployeeKpi> EmployeeKpis { get; set; }
     }
 }

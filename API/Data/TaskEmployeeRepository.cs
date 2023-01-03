@@ -1,4 +1,6 @@
+using API.Dtos;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +34,14 @@ namespace API.Data
                 .Include(s => s.AppUser)
                 .ToListAsync();
 
+            return query;
+        }
+        
+        public async Task<IEnumerable<UserTasks>> GetTaskEmployeesFilter(TaskEmployeeFilterParams taskEmployeeFilterParams)
+        {
+            var query = await _context.UserTasks.Where(s => s.EndDate < DateTime.Parse(taskEmployeeFilterParams.EndDate) 
+                                                            && s.StartDate > DateTime.Parse(taskEmployeeFilterParams.StartDate))
+                .ToListAsync();
             return query;
         }
 

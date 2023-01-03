@@ -1,4 +1,6 @@
+using API.Dtos;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Interfaces
 {
@@ -9,5 +11,6 @@ namespace API.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<TaskEmployee>> GetTaskEmployees();
         Task<TaskEmployee> GetTasksEmployeeFromId(int id);
+        Task<IEnumerable<UserTasks>> GetTaskEmployeesFilter(TaskEmployeeFilterParams taskEmployeeFilterParams);
     }
 }

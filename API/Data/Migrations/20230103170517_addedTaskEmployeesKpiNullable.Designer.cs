@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230103170517_addedTaskEmployeesKpiNullable")]
+    partial class addedTaskEmployeesKpiNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,7 +270,7 @@ namespace API.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int?>("AppRoleId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("DailyTarget")
@@ -280,14 +282,22 @@ namespace API.Data.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserRolesRoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserRolesUserId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("WeeklyTarget")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppRoleId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("UserRolesUserId", "UserRolesRoleId");
 
                     b.ToTable("EmployeeKpis");
                 });
@@ -920,17 +930,21 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.EmployeeKpi", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", "AppUser")
+                    b.HasOne("API.Entities.AppRole", null)
                         .WithMany("EmployeeKpis")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppRoleId");
 
                     b.HasOne("API.Entities.Product", "Product")
                         .WithMany("EmployeeKpis")
                         .HasForeignKey("ProductId");
 
-                    b.Navigation("AppUser");
+                    b.HasOne("API.Entities.AppUserRole", "UserRoles")
+                        .WithMany()
+                        .HasForeignKey("UserRolesUserId", "UserRolesRoleId");
 
                     b.Navigation("Product");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("API.Entities.Factory", b =>
@@ -1109,13 +1123,13 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppRole", b =>
                 {
+                    b.Navigation("EmployeeKpis");
+
                     b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Navigation("EmployeeKpis");
-
                     b.Navigation("Grns");
 
                     b.Navigation("TaskEmployees");
