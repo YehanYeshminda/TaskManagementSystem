@@ -10,5 +10,7 @@ namespace API.Interfaces
         Task<IEnumerable<IncomeSummaryReportDto>> GetInomeSummaryReport();
         Task<IEnumerable<ProductIncomeDtoReport>> GetProductIncomeSummaryReport();
         Task<IEnumerable<EmployeeSummaryDto>> GetEmployeeSummaryReport();
+        Task<IEnumerable<ProductDto>> GetProductReport();
+        Task<IEnumerable<WorkshopProductionDto>> GetWorkshopProductionReport();
     }
 }

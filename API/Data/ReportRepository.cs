@@ -66,5 +66,23 @@ namespace API.Data
 
             return _mapper.Map<IEnumerable<ProductIncomeDtoReport>>(query);
         }
+
+        public async Task<IEnumerable<ProductDto>> GetProductReport()
+        {
+            var query = await _context.Product.
+                Include(s => s.UserTasks)
+                .ToListAsync();
+
+            return _mapper.Map<IEnumerable<ProductDto>>(query);
+        }
+
+        public async Task<IEnumerable<WorkshopProductionDto>> GetWorkshopProductionReport()
+        {
+            var query = await _context.WorkShops.
+                Include(s => s.UserTasks)
+                .ToListAsync();
+
+            return _mapper.Map<IEnumerable<WorkshopProductionDto>>(query);
+        }
     }
 }

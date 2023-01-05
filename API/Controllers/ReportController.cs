@@ -42,5 +42,17 @@ namespace API.Controllers
         {
             return await _reportRepository.GetEmployeeSummaryReport();
         }
+
+        [HttpGet("ProductReport")]
+        public async Task<IEnumerable<ProductDto>> ProductReportAsync()
+        {
+            return await _reportRepository.GetProductReport();
+        }
+
+        [HttpGet("WorkshopProductionReport")]
+        public async Task<IEnumerable<WorkshopProductionDto>> WorkshopProductionReportAsync()
+        {
+            return await _reportRepository.GetWorkshopProductionReport();
+        }
     }
 }

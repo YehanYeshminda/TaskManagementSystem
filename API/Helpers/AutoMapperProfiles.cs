@@ -55,6 +55,14 @@ namespace API.Helpers
                 .ForMember(s => s.EmployeeNIC, opt => opt.MapFrom(s => s.AppUser.NIC))
                 .ForMember(s => s.DepartmentName, opt => opt.MapFrom(s => s.AppUser.Departments.Name))
                 .ForMember(s => s.LastPositions, opt => opt.MapFrom(s => s.AppUser.UserRoles.Select(s => s.Role.Name)));
+
+            CreateMap<Product, ProductDto>()
+                .ForMember(s => s.NumberOfSales, opt => opt.MapFrom(p => p.UserTasks.Sum(a => a.Qty)));
+
+            CreateMap<WorkShop, WorkshopProductionDto>()
+                .ForMember(s => s.WorkShopName, opt => opt.MapFrom(p => p.Name))
+                .ForMember(s => s.WorkShopDescription, opt => opt.MapFrom(p => p.Description))
+                .ForMember(s => s.NumberOfProducts, opt => opt.MapFrom(p => p.UserTasks.Sum(a => a.Qty)));
         }
     }
 }
